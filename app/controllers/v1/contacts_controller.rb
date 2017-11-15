@@ -13,7 +13,7 @@ class V1::ContactsController < ApplicationController
   end
 
   def delete
-    @contact = Contact.where(:id params[:id]).first
+    @contact = Contact.where(id: params[:id]).first
     if @contact.destroy
       head(:ok)
     else
