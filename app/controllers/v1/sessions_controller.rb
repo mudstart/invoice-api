@@ -3,7 +3,7 @@ class V1::SessionsController < ApplicationController
     current_user ? head(:ok) : head(:unauthorized)
   end
 
-  end
+
   def create
     @user = User.where(email: params[:email]).first
 
@@ -15,20 +15,15 @@ class V1::SessionsController < ApplicationController
   end
 
   def destroy
-
-    if nilify_token && current_user.save
+    current_user&.authentication_token = nil
+    if current_user.save
       head(:ok)
     else
       head(:unauthorized)
     end
   end
 
-private
-
-def nilify_token
-  current_user&.authentication_token = nil
 end
 
-end
 
 

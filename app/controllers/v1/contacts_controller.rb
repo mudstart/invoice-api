@@ -1,5 +1,7 @@
 class V1::ContactsController < ApplicationController
   def index
+    sleep 2
+
     @contacts = current_user.contacts
 
     render :index, status: :ok
