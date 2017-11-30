@@ -1,20 +1,26 @@
 # frozen_string_literal: true
 
 module V1
-  # manage the Account model
+  # Manages the Account model
   class AccountsController < ApplicationController
-    def create
-      @account = current_user.accounts.build(account_params)
+    def index
+      accounts = current_user.accounts
 
-      if @account.save
-        render :create, status: created
+      render :index, locals: { accounts: accounts }
+    end
+
+    def create
+      account = current_user.accounts.build(account_params)
+
+      if account.save
+        render :create, status: :created, locals: { account: account }
       else
         head(:unprocessable_entity)
       end
     end
 
     def update
-      @account = curren_user.accounts.friendly.find(params[:id])
+      @account = current_user.accounts.friendly.find(params[:id])
 
       if @account.update(account_params)
         render :update
@@ -26,7 +32,9 @@ module V1
     private
 
     def account_params
-      params.require(:account).permit(:name, :address, :var_rate, :tax_payer_id, :default_currency)
+      params.require(:account).permit(
+        :name, :address, :vat_rate, :tax_payer_id, :default_currency
+      )
     end
   end
 end
