@@ -4,20 +4,18 @@ require 'test_helper'
 
 module V1
   class ContactsControllerTest < ActionDispatch::IntegrationTest
-    test 'should get only contact for artellectual' do
+    test 'should get only contacts for artellectual' do
       account = accounts(:artellectual)
 
-      not_artellectial_contact = contacts(:two)
+      not_artellectual_contact = contacts(:two)
 
-      get(
-        v1_contacts_path(account_id: account.id)
-      )
+      get v1_contacts_path(account_id: account.id)
 
       contacts = JSON.parse(@response.body)['data']
       contact_ids = contacts.map { |contact| contact['id'] }
 
       assert_response :success
-      assert_not_includes contact_ids, not_artellectial_contact.id
+      assert_not_includes contact_ids, not_artellectual_contact.id
     end
 
     test 'should create contact under the correct org' do

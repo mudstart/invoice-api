@@ -3,6 +3,8 @@
 module V1
   # Contacs Controller endpoind
 class ContactsController < ApplicationController
+  include V1::Contacts::Response
+
   def index
     @contacts = current_account.contacts
 
@@ -10,23 +12,16 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = current_organization.contacts.build(contact_params)
+    contact = current_organization.contacts.build(contact_params)
 
-    if @contact.save
-      render :create, status: :created
-    else
-      head(:unprocessable_entity)
-    end
+    create_and_render_contact(contact) || render_invalid_response
   end
 
   def update
-    @contact = current_organization.contacts.find(params[:id])
+    contact = current_organization.contacts.find(params[:id])
 
-    if @contact.update(contact_params)
-      render :update
-    else
-      head(:unprocessable_entity)
-    end
+    update_and_render_contact(contact, contact_params) ||
+      render_invalid_response
   end
 
   def destroy
@@ -40,10 +35,6 @@ class ContactsController < ApplicationController
   end
 
   private
-
-  def current_account
-    @current_account ||= Account.friendly.find(params[:account_id])
-  end
 
   def current_organization
     @current_organization ||=
