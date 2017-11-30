@@ -47,7 +47,7 @@ class ContactsController < ApplicationController
 
   def current_organization
     @current_organization ||=
-    current_account.organizations.friendly.find(params[:organization_id])
+    current_account.organizations.find(params[:organization_id])
   end
 
   def contact_params

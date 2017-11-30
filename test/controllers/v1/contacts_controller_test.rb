@@ -19,5 +19,28 @@ module V1
       assert_response :success
       assert_not_includes contact_ids, not_artellectial_contact.id
     end
+
+    test 'should create contact under the correct org' do
+      account = accounts(:artellectual)
+      org = account.organizations.first
+
+      first_name = Faker::Name.name
+      last_name = Faker::Name.name
+
+      post(
+        v1_organization_contacts_path(
+          account_id: account.id,
+          organization_id: org.id
+        ),
+        params: {
+          contact: { first_name: first_name, last_name: last_name }
+        }
+      )
+
+      contact = JSON.parse(@response.body)['data']['contact']
+
+      assert_response :created
+      assert_equal first_name, contact['first_name']
+    end
   end
 end
