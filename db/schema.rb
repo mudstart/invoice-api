@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127184218) do
+ActiveRecord::Schema.define(version: 20170624113256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "accounts", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.bigint "owner_id"
+    t.integer "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "address"
@@ -29,29 +29,29 @@ ActiveRecord::Schema.define(version: 20171127184218) do
     t.index ["slug"], name: "index_accounts_on_slug", unique: true
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "organization_id"
+    t.integer "organization_id"
     t.index ["organization_id"], name: "index_contacts_on_organization_id"
   end
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "organizations", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "address"
     t.string "tax_payer_number"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_id"], name: "index_organizations_on_account_id"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

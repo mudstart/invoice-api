@@ -5,11 +5,12 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: 'test@test.com'
-  authentication_token: 'jsaksajdkldsa'
+  email: 'test_user@example.com'
+  authentication_token: 'blah1234test'
   confirmed_at: <%= Time.now %>
-
+# column: value
+#
 two:
   email: <%= Faker::Internet.email %>
-  authentication_token: 'sajkljsakjdajdsa'
+  authentication_token: 'different_token'
   confirmed_at: <%= Time.now %>

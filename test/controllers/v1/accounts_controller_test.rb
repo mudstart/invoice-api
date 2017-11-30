@@ -19,7 +19,6 @@ module V1
       get v1_accounts_path, headers: @header
 
       accounts = JSON.parse(@response.body)['data']
-
       account_ids = accounts.map { |account| account['id'] }
 
       assert_response :success

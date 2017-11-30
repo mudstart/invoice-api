@@ -1,10 +1,9 @@
 artellectual:
-  name: 'Artellecctual Co., LTD.'
-  slug: 'artellectual-co-ltd'
+  name: "Artellectual Co., Ltd."
+  slug: "artellectual-co-ltd"
   owner: one
-
 
 another_one:
   name: <%= Faker::Company.name %>
-  slug: 'another-one'
+  slug: "another-one"
   owner: two

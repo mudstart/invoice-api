@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 module V1
   module Contacts
-    # Response for contacts Controller
+    # Response for contacts controller
     module Response
       extend ActiveSupport::Concern
 

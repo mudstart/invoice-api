@@ -7,7 +7,7 @@ class AddConfirmableToUsers < ActiveRecord::Migration[5.1]
 
     add_index :users, :confirmation_token, unique: true
 
-    User.all.update_all confirmed_at: DateTime.now
+    execute("UPDATE users SET confirmed_at = NOW()")
   end
 
   def down

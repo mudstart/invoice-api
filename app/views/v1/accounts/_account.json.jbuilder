@@ -1,9 +1,10 @@
 json.call(
   account,
   :id,
+  :slug,
   :name,
   :address,
-  :vat_rate,
+  :tax_payer_id,
   :default_currency,
-  :tax_payer_id
+  :vat_rate
 )

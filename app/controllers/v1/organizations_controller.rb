@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  #  OrganizationsController
+  # OrganizationsController
   class OrganizationsController < ApplicationController
     def index
       organizations = current_account.organizations
@@ -26,6 +26,5 @@ module V1
     def organization_params
       params.require(:organization).permit(:name, :address, :tax_payer_number)
     end
-
   end
 end

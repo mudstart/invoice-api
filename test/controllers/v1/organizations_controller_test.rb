@@ -31,7 +31,7 @@ module V1
       assert_not_includes organization_ids, org_two.id
     end
 
-    test 'creates organization for user' do
+    test 'creates account for user' do
       organization_params = {
         name: Faker::Company.name,
         tax_payer_number: Faker::Company.ein,
